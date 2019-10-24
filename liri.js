@@ -25,7 +25,7 @@ var spotifySong = function(value) {
             limit: 5
         })
         .then(function(response) {
-            console.log("\n___________________________________________\n");
+            console.log("\n------------------------------------");
             for (var i = 0; i < response.tracks.items.length; i++) {
                 var album = response.tracks.items[i].album.name;
                 var artist = response.tracks.items[i].artists[0, 0].name;
@@ -34,7 +34,7 @@ var spotifySong = function(value) {
                 console.log("Artist: " + artist + "\n" +
                     "Song: " + song + "\n" +
                     "Album: " + album + "\n" +
-                    "Preview: " + preview + "\n___________________________________________\n");
+                    "Preview: " + preview + "\n-------------------------------------------");
             }
         })
         .catch(function(err) {
@@ -47,13 +47,13 @@ switch (action) {
     case 'concert-this':
         axios.get("https://rest.bandsintown.com/artists/" + value + "/events?app_id=codingbootcamp&date=upcoming")
             .then(function(response) {
-                console.log("\n___________________________________________\n");
+                console.log("\n---------------------------------");
                 for (var i = 0; i < response.data.length; i++) {
-                    var concertData = response.data[i];
-                    var formattedDate = moment(concertData.datetime).format('L');
-                    console.log("Venue: " + JSON.stringify(concertData.venue.name) + "\n" +
-                        "Venue Location: " + JSON.stringify(concertData.venue.city) + ", " + JSON.stringify(concertData.venue.region) + "\n" +
-                        "Date: " + formattedDate + "\n___________________________________________\n");
+                    var concert = response.data[i];
+                    var dateFromatted = moment(concert.datetime).format('L');
+                    console.log("Venue: " + JSON.stringify(concert.venue.name) + "\n" +
+                        "Venue Location: " + JSON.stringify(concert.venue.city) + ", " + JSON.stringify(concert.venue.region) + "\n" +
+                        "Date: " + dateFromatted + "\n---------------------------------");
                 };
             }).catch(function(error) {
                 console.log("An error has occured: " + error);
@@ -73,7 +73,7 @@ switch (action) {
                     var movieData = response.data;
                     var imdb = movieData.Ratings[0].Value;
                     var rotten = movieData.Ratings[1].Value;
-                    console.log("\n___________________________________________\n");
+                    console.log("\n---------------------------------");
                     console.log("Title: " + movieData.Title + "\n" +
                         "Year: " + movieData.Year + "\n" +
                         "IMDB:  " + imdb + "\n" +
@@ -82,7 +82,7 @@ switch (action) {
                         "Language: " + movieData.Language + "\n" +
                         "Plot: " + movieData.Plot + "\n" +
                         "Actors: " + movieData.Actors + "\n");
-                    console.log("\n___________________________________________\n");
+                    console.log("\n---------------------------------");
                 })
             .catch(function(error) {
                 console.log(error);
